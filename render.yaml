@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: mqtt-broker
+    env: docker
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: WEB_CONCURRENCY
+        value: 4
