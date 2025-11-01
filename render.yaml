@@ -3,7 +3,14 @@ services:
     name: mqtt-broker
     env: docker
     plan: free
-    healthCheckPath: /
-    envVars:
-      - key: WEB_CONCURRENCY
-        value: 4
+    # Мы убрали healthCheckPath, чтобы Render не делал HTTP-проверки
+    # Вместо этого мы указываем Render, что нужно просто дождаться открытия TCP-порта
+    healthCheck:
+      type: tcp
+      port: 1883 # Проверяем, что Mosquitto запустился и слушает свой стандартный порт
+    # Добавляем перенаправление портов, чтобы Render знал, куда направлять трафик
+    ports:
+      - port: 1883 # Внутренний MQTT порт
+        protocol: TCP
+      - port: 9001 # Внутренний WebSocket порт
+        protocol: TCP
