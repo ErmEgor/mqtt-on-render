@@ -3,7 +3,3 @@ services:
     name: mqtt-broker
     env: docker
     plan: free
-    httpPort: 9001
-    healthCheck:
-      type: tcp
-      port: 9001
