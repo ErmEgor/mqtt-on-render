@@ -8,9 +8,3 @@ services:
     healthCheck:
       type: tcp
       port: 1883 # Проверяем, что Mosquitto запустился и слушает свой стандартный порт
-    # Добавляем перенаправление портов, чтобы Render знал, куда направлять трафик
-    ports:
-      - port: 1883 # Внутренний MQTT порт
-        protocol: TCP
-      - port: 9001 # Внутренний WebSocket порт
-        protocol: TCP
